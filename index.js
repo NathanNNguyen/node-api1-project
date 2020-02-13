@@ -101,5 +101,5 @@ server.put('/api/users/:id', async (req, res) => {
 })
 
 // create port and make server listen to it
-const port = 5000;
+const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`\n Server listening on port ${port} \n`));
