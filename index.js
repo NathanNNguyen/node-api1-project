@@ -53,17 +53,6 @@ server.delete('/api/users/:id', async (req, res) => {
   catch{
     res.status(500).json({ error: 'The user could not be removed.' })
   }
-  // if (specUser.id !== id) {
-  //   res.status(404).json({ error: 'The user with the specified ID does not exist.' })
-  // }
-  // else {
-  //   Users.remove(id).then(removed => {
-  //     res.status(200).json(removed);
-  //   }).catch(err => {
-  //     console.log(err);
-  //     res.status(500).json({ error: 'The user could not be removed.' })
-  //   })
-  // }
 });
 
 // update a user
@@ -85,19 +74,6 @@ server.put('/api/users/:id', async (req, res) => {
   catch {
     res.status(500).json({ message: 'The user information could not be modified.' })
   }
-
-  // if (specUser.id !== id) {
-  //   res.status(404).json({ err: 'The user with the specified ID does not exist.' })
-  // } else if (!specUser.name || !specUser.bio) {
-  //   res.status(400).json({ message: 'Please provide name and bio for the user.' })
-  // } else {
-  //   Users.update(id, specUser).then(user => {
-  //     res.status(200).json(user)
-  //   }).catch(err => {
-  //     console.log(err);
-  //     res.status(500).json({ errorMessage: "The user information could not be modified." });
-  //   })
-  // }
 })
 
 // create port and make server listen to it
