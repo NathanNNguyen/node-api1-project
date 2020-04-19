@@ -47,6 +47,22 @@ server.get('/api/users/:id', async (req, res) => {
   catch (err) {
     res.status(500).json({ err, message: 'The user information could not be retrieved' })
   }
+});
+
+server.delete('/api/users/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await db.findById(id)
+    if (!user) {
+      res.status(404).json({ message: 'The user with the specified ID does not exist' })
+    } else {
+      const removed = await db.remove(id);
+      res.json(removed)
+    }
+  }
+  catch (err) {
+    res.status(500).json({ err, message: 'The user could not be removed' })
+  }
 })
 
 
