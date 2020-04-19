@@ -63,8 +63,26 @@ server.delete('/api/users/:id', async (req, res) => {
   catch (err) {
     res.status(500).json({ err, message: 'The user could not be removed' })
   }
-})
+});
 
+server.put('/api/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const user = req.body;
+  try {
+    const specUser = await db.findById(id);
+    if (!specUser) {
+      res.status(404).json({ message: 'The user with the specified ID does not exist' })
+    } else if (!user.name || !user.bio) {
+      res.status(400).json({ message: 'Please provide name and bio for the user' })
+    } else {
+      const updated = await db.update(id, user);
+      res.status(200).json(updated)
+    }
+  }
+  catch (err) {
+    res.status(500).json({ err, message: 'The user information could not be modified' })
+  }
+});
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => console.log(`\n Listerning on port ${port}... \n`))
